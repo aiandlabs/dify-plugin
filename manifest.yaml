@@ -1,0 +1,42 @@
+version: 0.0.1
+type: plugin
+author: aiand
+name: aiand
+label:
+  en_US: ai&
+  ja_JP: ai&
+description:
+  en_US: Open-weight models from ai& (DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more) through an OpenAI-compatible API, with tool calling, vision and reasoning control.
+  ja_JP: ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi、Gemma、gpt-oss など）を OpenAI 互換 API で利用できます。ツール呼び出し、画像入力、推論の強度に対応しています。
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    model:
+      enabled: true
+      llm: true
+      text_embedding: false
+      rerank: false
+      tts: false
+      speech2text: false
+      moderation: false
+plugins:
+  models:
+    - provider/aiand.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: 1.0.0
+created_at: 2026-10-20T00:00:00Z
+privacy: https://aiand.com/privacy
+repo: https://github.com/aiandlabs/dify-plugin
+contact: support@aiand.com
+network:
+  domains:
+    - api.aiand.com
