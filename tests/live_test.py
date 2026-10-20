@@ -107,6 +107,9 @@ def main():
     llm = AiandLargeLanguageModel(model_schemas=all_schemas)
     llm.validate_credentials("google/gemma-4-31b-it", {"api_key": KEY})
     check("credentials", True)
+    unknown = set(sys.argv[1:]) - {s.model for s in all_schemas}
+    if unknown:
+        sys.exit(f"unknown model id: {', '.join(sorted(unknown))}")
     for s in all_schemas:
         if sys.argv[1:] and s.model not in sys.argv[1:]:
             continue

@@ -18,7 +18,6 @@ FEATURES = {
     "reasoning": ["agent-thought"],
     "vision": ["vision"],
     "video": ["video"],
-    "document": ["document"],
 }
 
 
