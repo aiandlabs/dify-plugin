@@ -105,7 +105,7 @@ def run(llm, schema):
 def main():
     all_schemas = schemas()
     llm = AiandLargeLanguageModel(model_schemas=all_schemas)
-    llm.validate_credentials("google/gemma-4-31b-it", {"api_key": KEY})
+    llm.validate_credentials(all_schemas[0].model, {"api_key": KEY})
     check("credentials", True)
     unknown = set(sys.argv[1:]) - {s.model for s in all_schemas}
     if unknown:

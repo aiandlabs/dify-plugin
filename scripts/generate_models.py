@@ -6,6 +6,7 @@ Run after ai& adds, retires, or reprices a model:
 """
 
 import json
+from decimal import Decimal
 import pathlib
 import urllib.request
 
@@ -23,6 +24,10 @@ FEATURES = {
 
 def file_name(model_id: str) -> str:
     return model_id.split("/")[-1] + ".yaml"
+
+
+def price(per_1m: str) -> str:
+    return format(Decimal(per_1m).normalize(), "f")
 
 
 def render(m: dict) -> str:
@@ -54,7 +59,7 @@ def render(m: dict) -> str:
         lines += [
             "  - name: reasoning_effort",
             "    type: string",
-            "    required: false",
+            "    required: true",
             f"    default: {m['reasoning_effort_default']}",
             "    label:",
             "      en_US: Reasoning effort",
@@ -75,8 +80,8 @@ def render(m: dict) -> str:
         "  - name: json_schema",
         "    use_template: json_schema",
         "pricing:",
-        f"  input: \"{m['input_per_1m'].rstrip('0').rstrip('.')}\"",
-        f"  output: \"{m['output_per_1m'].rstrip('0').rstrip('.')}\"",
+        f"  input: \"{price(m['input_per_1m'])}\"",
+        f"  output: \"{price(m['output_per_1m'])}\"",
         "  unit: \"0.000001\"",
         "  currency: USD",
     ]

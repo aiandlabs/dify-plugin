@@ -24,7 +24,7 @@ parameter_rules:
     max: 32768
   - name: reasoning_effort
     type: string
-    required: false
+    required: true
     default: xhigh
     label:
       en_US: Reasoning effort

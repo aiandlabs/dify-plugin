@@ -22,7 +22,7 @@ parameter_rules:
     max: 262144
   - name: reasoning_effort
     type: string
-    required: false
+    required: true
     default: high
     label:
       en_US: Reasoning effort

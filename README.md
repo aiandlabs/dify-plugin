@@ -17,7 +17,7 @@ All current ai& chat models are available after setup. Pick one in any LLM node,
 - **Tool calling** works on every model, including parallel and streamed tool calls.
 - **Image input** works on models marked with vision.
 - **Reasoning effort** lets you choose how much a model reasons before answering. Each model lists only the levels it supports. `none` turns reasoning off where the model allows it.
-- **Structured output** is available through the response format setting.
+- **Structured output** is available on listed models through the response format setting.
 
 To use a model that is not listed yet, choose **Add Model** and enter its ID from `https://api.aiand.com/v1/models`.
 
