@@ -40,14 +40,17 @@ def check(name, ok, detail=""):
 
 
 def schemas():
+    """Models in _position.yaml order, the order the provider validates against."""
+    llm_dir = ROOT / "models/llm"
+    position = yaml.safe_load((llm_dir / "_position.yaml").read_text())
     out = []
-    for f in sorted((ROOT / "models/llm").glob("*.yaml")):
+    for f in llm_dir.glob("*.yaml"):
         if f.name.startswith("_"):
             continue
         d = yaml.safe_load(f.read_text())
         d["fetch_from"] = "predefined-model"
         out.append(AIModelEntity(**d))
-    return out
+    return sorted(out, key=lambda s: position.index(s.model))
 
 
 def png(r, g, b, size=64):
