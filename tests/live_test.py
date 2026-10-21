@@ -90,7 +90,7 @@ def run(llm, schema):
     chunks = list(llm.invoke(m, {"api_key": KEY}, weather, params, tools=[WEATHER], stream=False))
     blocking_calls = [c for ch in chunks for c in (ch.delta.message.tool_calls or [])]
     content_ok = all(isinstance(ch.delta.message.content, (str, list)) for ch in chunks)
-    check(f"{m} blocking tool call", bool(blocking_calls) and content_ok)
+    check(f"{m} blocking tool call", any(c.function.name == "get_weather" for c in blocking_calls) and content_ok)
 
     effort = next((r for r in schema.parameter_rules if r.name == "reasoning_effort"), None)
     if effort and "none" in effort.options:
