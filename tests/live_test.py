@@ -2,7 +2,7 @@
 
 Drives AiandLargeLanguageModel with schemas built from this plugin's own YAML files:
 
-    AIAND_API_KEY=sk-... uv run --with "dify_plugin==0.10.2" --with pyyaml python tests/live_test.py [model-id ...]
+    AIAND_API_KEY=sk-... uv run --with "dify_plugin>=0.10.2,<0.11.0" --with pyyaml python tests/live_test.py [model-id ...]
 """
 
 import base64
