@@ -9,6 +9,7 @@ description:
   en_US: Open-weight models from ai& (DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more) through an OpenAI-compatible API, with tool calling, vision and reasoning control.
   ja_JP: ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi、Gemma、gpt-oss など）を OpenAI 互換 API で利用できます。ツール呼び出し、画像入力、推論の強度に対応しています。
 icon: icon.svg
+icon_dark: icon-dark.svg
 resource:
   memory: 268435456
   permission:
