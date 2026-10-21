@@ -1,6 +1,8 @@
 from collections.abc import Generator
 from typing import Optional, Union
 
+import requests
+
 from dify_plugin import OAICompatLargeLanguageModel
 from dify_plugin.entities.model import AIModelEntity, ModelFeature
 from dify_plugin.entities.model.llm import LLMMode, LLMResult
@@ -26,6 +28,24 @@ class AiandLargeLanguageModel(OAICompatLargeLanguageModel):
         if stream:
             model_parameters["stream_options"] = {"include_usage": True}
         return super()._invoke(model, credentials, prompt_messages, model_parameters, tools, stop, stream, user)
+
+    def _handle_generate_response(
+        self,
+        model: str,
+        credentials: dict,
+        response: requests.Response,
+        prompt_messages: list[PromptMessage],
+    ) -> LLMResult:
+        # A blocking tool-call reply has `content: null` (as on OpenAI). Dify's plugin daemon rejects a message
+        # without content, which breaks function-call nodes such as the parameter extractor. Fixing the result
+        # after super() is too late: without `usage`, the SDK's token count already raises on null content.
+        body = response.json()
+        for choice in body.get("choices", []):
+            message = choice.get("message")
+            if message is not None and message.get("content") is None:
+                message["content"] = ""
+        response.json = lambda **_: body
+        return super()._handle_generate_response(model, credentials, response, prompt_messages)
 
     def validate_credentials(self, model: str, credentials: dict) -> None:
         self._add_custom_parameters(credentials)
