@@ -25,7 +25,12 @@ class AiandLargeLanguageModel(OAICompatLargeLanguageModel):
         self._add_function_call(model, credentials)
         if stream:
             model_parameters["stream_options"] = {"include_usage": True}
-        return super()._invoke(model, credentials, prompt_messages, model_parameters, tools, stop, stream, user)
+        result = super()._invoke(model, credentials, prompt_messages, model_parameters, tools, stop, stream, user)
+        # A blocking tool-call reply has `content: null` (as on OpenAI), and Dify's plugin daemon
+        # rejects a message without content, which breaks function-call nodes such as the parameter extractor.
+        if isinstance(result, LLMResult) and result.message.content is None:
+            result.message.content = ""
+        return result
 
     def validate_credentials(self, model: str, credentials: dict) -> None:
         self._add_custom_parameters(credentials)
