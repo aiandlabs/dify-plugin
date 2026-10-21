@@ -13,6 +13,9 @@ import urllib.request
 CATALOG_URL = "https://api.aiand.com/v1/models"
 OUT = pathlib.Path(__file__).resolve().parent.parent / "models" / "llm"
 DEFAULT_MAX_TOKENS = 8192
+# Retire on 2026-10-27 00:00 JST but stay in /v1/models until then, which has no retirement date yet.
+# Delete once AIA-1892 publishes `deprecation_date` there and the generator reads it.
+RETIRING = {"deepseek-ai/deepseek-v4-flash", "moonshotai/kimi-k2.7-code", "zai-org/glm-5.2"}
 
 FEATURES = {
     "tool_calling": ["tool-call", "multi-tool-call", "stream-tool-call"],
@@ -90,7 +93,7 @@ def render(m: dict) -> str:
 
 def main() -> None:
     with urllib.request.urlopen(CATALOG_URL, timeout=30) as r:
-        models = json.load(r)["data"]
+        models = [m for m in json.load(r)["data"] if m["id"] not in RETIRING]
     for old in OUT.glob("*.yaml"):
         old.unlink()
     for m in models:
