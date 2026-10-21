@@ -1,0 +1,111 @@
+provider: aiand
+label:
+  en_US: ai&
+  ja_JP: ai&
+description:
+  en_US: Open-weight models through an OpenAI-compatible API.
+  ja_JP: OpenAI 互換 API で利用できるオープンウェイトモデル。
+icon_small:
+  en_US: icon.svg
+icon_small_dark:
+  en_US: icon-dark.svg
+icon_large:
+  en_US: icon.svg
+icon_large_dark:
+  en_US: icon-dark.svg
+background: "#F5F5F5"
+help:
+  title:
+    en_US: Get your API key from the ai& console
+    ja_JP: ai& コンソールで API キーを取得
+  url:
+    en_US: https://console.aiand.com
+supported_model_types:
+  - llm
+configurate_methods:
+  - predefined-model
+  - customizable-model
+provider_credential_schema:
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+        ja_JP: API キー
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your ai& API key (sk-...)
+        ja_JP: ai& の API キーを入力（sk-...）
+model_credential_schema:
+  model:
+    label:
+      en_US: Model ID
+      ja_JP: モデル ID
+    placeholder:
+      en_US: A model ID from https://api.aiand.com/v1/models
+      ja_JP: https://api.aiand.com/v1/models に記載のモデル ID
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+        ja_JP: API キー
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Enter your ai& API key (sk-...)
+        ja_JP: ai& の API キーを入力（sk-...）
+    - variable: context_size
+      label:
+        en_US: Context size
+        ja_JP: コンテキスト長
+      type: text-input
+      required: true
+      default: "262144"
+    - variable: max_tokens_to_sample
+      label:
+        en_US: Upper bound for max tokens
+        ja_JP: 最大トークン数の上限
+      type: text-input
+      default: "32768"
+    - variable: function_calling_type
+      label:
+        en_US: Tool calling
+        ja_JP: ツール呼び出し
+      type: select
+      required: false
+      default: tool_call
+      options:
+        - value: tool_call
+          label:
+            en_US: Supported
+            ja_JP: 対応
+        - value: no_call
+          label:
+            en_US: Not supported
+            ja_JP: 非対応
+    - variable: vision_support
+      label:
+        en_US: Vision (image input)
+        ja_JP: 画像入力
+      type: select
+      required: false
+      default: not_support
+      options:
+        - value: support
+          label:
+            en_US: Supported
+            ja_JP: 対応
+        - value: not_support
+          label:
+            en_US: Not supported
+            ja_JP: 非対応
+models:
+  llm:
+    predefined:
+      - models/llm/*.yaml
+    position: models/llm/_position.yaml
+extra:
+  python:
+    provider_source: provider/aiand.py
+    model_sources:
+      - models/llm/llm.py

@@ -1,0 +1,49 @@
+model: zai-org/glm-5.3
+label:
+  en_US: zai-org/glm-5.3
+model_type: llm
+features:
+  - agent-thought
+  - tool-call
+  - multi-tool-call
+  - stream-tool-call
+model_properties:
+  mode: chat
+  context_size: 1048576
+parameter_rules:
+  - name: temperature
+    use_template: temperature
+  - name: top_p
+    use_template: top_p
+  - name: max_tokens
+    use_template: max_tokens
+    default: 8192
+    min: 1
+    max: 131072
+  - name: reasoning_effort
+    type: string
+    required: true
+    default: max
+    label:
+      en_US: Reasoning effort
+      ja_JP: 推論の強度
+    help:
+      en_US: How much the model reasons before answering. none turns reasoning off where the model supports it.
+      ja_JP: 回答前にモデルが推論する量です。none は対応モデルで推論をオフにします。
+    options:
+      - low
+      - high
+      - max
+  - name: response_format
+    use_template: response_format
+    options:
+      - text
+      - json_object
+      - json_schema
+  - name: json_schema
+    use_template: json_schema
+pricing:
+  input: "1"
+  output: "4"
+  unit: "0.000001"
+  currency: USD
