@@ -36,8 +36,9 @@ class AiandLargeLanguageModel(OAICompatLargeLanguageModel):
         response: requests.Response,
         prompt_messages: list[PromptMessage],
     ) -> LLMResult:
-        # A blocking tool-call reply has `content: null` (as on OpenAI). The SDK needs a string to count
-        # tokens, and Dify's plugin daemon rejects a message without content, so normalise it first.
+        # A blocking tool-call reply has `content: null` (as on OpenAI). Dify's plugin daemon rejects a message
+        # without content, which breaks function-call nodes such as the parameter extractor. Fixing the result
+        # after super() is too late: without `usage`, the SDK's token count already raises on null content.
         body = response.json()
         for choice in body.get("choices", []):
             message = choice.get("message")
