@@ -8,9 +8,16 @@ on:
 permissions:
   contents: read
 
+env:
+  DIFY_CLI_VERSION: 0.6.11
+  DIFY_CLI_SHA256: e68208928fbd8e7bc2c4cf0943f5091f8fbd0a25119ab4f36d6071b94a69a6fc
+  # Pinned so an upstream rule change can't turn unrelated PRs red; bump it deliberately before a release.
+  MARKETPLACE_TOOLKIT_REF: 57a21d1304b1108df3e6b90a15a4f5dd9f0915f9
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -20,19 +27,22 @@ jobs:
 
       - name: Check model schemas
         run: |
-          pip install -q -r requirements.txt pyyaml
+          pip install -q -r requirements.txt
           python scripts/check_models.py
 
       - name: Package with the Dify CLI
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download 0.6.11 -R langgenius/dify-plugin-daemon -p dify-plugin-linux-amd64 -O "$RUNNER_TEMP/dify"
+          gh release download "$DIFY_CLI_VERSION" -R langgenius/dify-plugin-daemon -p dify-plugin-linux-amd64 -O "$RUNNER_TEMP/dify"
+          echo "$DIFY_CLI_SHA256  $RUNNER_TEMP/dify" | sha256sum -c -
           chmod +x "$RUNNER_TEMP/dify"
           "$RUNNER_TEMP/dify" plugin package . -o "$RUNNER_TEMP/aiand.difypkg"
 
       - name: Marketplace validator
         run: |
-          git clone -q --depth 1 https://github.com/langgenius/dify-marketplace-toolkit.git "$RUNNER_TEMP/toolkit"
+          git init -q "$RUNNER_TEMP/toolkit"
           cd "$RUNNER_TEMP/toolkit"
-          python validator/validate-difypkg.py "$RUNNER_TEMP/aiand.difypkg" --output-dir "$RUNNER_TEMP/report"
+          git fetch -q --depth 1 https://github.com/langgenius/dify-marketplace-toolkit.git "$MARKETPLACE_TOOLKIT_REF"
+          git checkout -q FETCH_HEAD
+          python validator/validate-difypkg.py "$RUNNER_TEMP/aiand.difypkg" --offline
