@@ -35,7 +35,7 @@ meta:
     entrypoint: main
   minimum_dify_version: 1.0.0
 created_at: 2026-10-20T00:00:00Z
-privacy: https://aiand.com/privacy
+privacy: PRIVACY.md
 repo: https://github.com/aiandlabs/dify-plugin
 contact: support@aiand.com
 network:

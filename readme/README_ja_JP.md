@@ -19,7 +19,7 @@ Dify で ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi
 
 一覧にないモデルを使う場合は **モデルを追加** を選び、`https://api.aiand.com/v1/models` に記載のモデル ID を入力してください。
 
-## 必要なもの
+## 接続要件
 
 - ai& の API キー
 - Dify から `api.aiand.com` への HTTPS 通信
@@ -30,7 +30,7 @@ Dify で ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi
 
 ## プライバシー
 
-回答の生成のため、プロンプトと応答は ai& に送信されます。[ai& のプライバシーポリシー](https://aiand.com/privacy)をご覧ください。
+回答の生成のため、プロンプトと応答は ai& に送信されます。[PRIVACY.md](../PRIVACY.md) と [ai& のプライバシーポリシー](https://aiand.com/privacy)をご覧ください。
 
 ## サポート
 

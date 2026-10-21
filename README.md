@@ -2,7 +2,7 @@
 
 Use ai& open-weight models in Dify: DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more, served through an OpenAI-compatible API at `https://api.aiand.com/v1`.
 
-日本語版は [readme/README_ja_JP.md](readme/README_ja_JP.md) をご覧ください。
+Japanese: [readme/README_ja_JP.md](readme/README_ja_JP.md)
 
 ## Setup
 
@@ -21,10 +21,10 @@ All current ai& chat models are available after setup. Pick one in any LLM node,
 
 To use a model that is not listed yet, choose **Add Model** and enter its ID from `https://api.aiand.com/v1/models`.
 
-## Requirements
+## Connection requirements
 
 - An ai& API key.
-- Outbound HTTPS access from your Dify instance to `api.aiand.com`.
+- Outbound HTTPS network access from your Dify instance to the `api.aiand.com` endpoint.
 
 ## Pricing
 
@@ -32,7 +32,7 @@ Requests are billed to your ai& account at the prices published on the [ai& pric
 
 ## Privacy
 
-Prompts and responses are sent to ai& to generate replies. See the [ai& privacy policy](https://aiand.com/privacy).
+Prompts and responses are sent to ai& to generate replies. See [PRIVACY.md](PRIVACY.md) and the [ai& privacy policy](https://aiand.com/privacy).
 
 ## Support
 
