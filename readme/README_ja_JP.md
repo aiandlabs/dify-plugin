@@ -30,7 +30,7 @@ Dify で ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi
 
 ## プライバシー
 
-回答の生成のため、プロンプトと応答は ai& に送信されます。[PRIVACY.md](../PRIVACY.md) と [ai& のプライバシーポリシー](https://aiand.com/privacy)をご覧ください。
+回答の生成のため、プロンプトと応答は ai& に送信されます。[PRIVACY.md](https://github.com/aiandlabs/dify-plugin/blob/main/PRIVACY.md) と [ai& のプライバシーポリシー](https://aiand.com/privacy)をご覧ください。
 
 ## サポート
 

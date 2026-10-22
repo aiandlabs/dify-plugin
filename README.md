@@ -2,8 +2,6 @@
 
 Use ai& open-weight models in Dify: DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more, served through an OpenAI-compatible API at `https://api.aiand.com/v1`.
 
-Japanese: [readme/README_ja_JP.md](readme/README_ja_JP.md)
-
 ## Setup
 
 1. Create an API key in the [ai& console](https://console.aiand.com). Keys start with `sk-`.
@@ -32,7 +30,7 @@ Requests are billed to your ai& account at the prices published on the [ai& pric
 
 ## Privacy
 
-Prompts and responses are sent to ai& to generate replies. See [PRIVACY.md](PRIVACY.md) and the [ai& privacy policy](https://aiand.com/privacy).
+Prompts and responses are sent to ai& to generate replies. See [PRIVACY.md](https://github.com/aiandlabs/dify-plugin/blob/main/PRIVACY.md) and the [ai& privacy policy](https://aiand.com/privacy).
 
 ## Support
 
