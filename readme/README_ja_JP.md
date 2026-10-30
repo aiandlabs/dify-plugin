@@ -1,6 +1,6 @@
 # ai& for Dify
 
-Dify で ai& のオープンウェイトモデル（DeepSeek、Qwen、GLM、Kimi、Gemma、gpt-oss など）を利用できます。`https://api.aiand.com/v1` の OpenAI 互換 API で提供しています。
+Dify で、日本国内でホストされる ai& のオープンモデル（Gemma・gpt-oss をはじめ多数）を利用できます。`https://api.aiand.com/v1` の OpenAI 互換 API で提供しています。
 
 ## セットアップ
 

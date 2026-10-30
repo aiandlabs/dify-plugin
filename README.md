@@ -1,6 +1,6 @@
 # ai& for Dify
 
-Use ai& open-weight models in Dify: DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more, served through an OpenAI-compatible API at `https://api.aiand.com/v1`.
+Use ai&'s Japan-hosted open models in Dify, including Gemma, gpt-oss and many more, through an OpenAI-compatible API at `https://api.aiand.com/v1`.
 
 ## Setup
 
