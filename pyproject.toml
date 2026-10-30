@@ -1,6 +1,6 @@
 [project]
 name = "aiand"
-version = "0.0.1"
+version = "0.0.2"
 description = "ai& model provider plugin for Dify"
 readme = "README.md"
 requires-python = ">=3.12"

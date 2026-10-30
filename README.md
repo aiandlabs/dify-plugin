@@ -14,6 +14,7 @@ All current ai& chat models are available after setup. Pick one in any LLM node,
 
 - **Tool calling** works on every model, including parallel and streamed tool calls.
 - **Image input** works on models marked with vision.
+- **Video input** works on models marked with video.
 - **Reasoning effort** lets you choose how much a model reasons before answering. Each model lists only the levels it supports. `none` turns reasoning off where the model allows it.
 - **Structured output** is available on listed models through the response format setting.
 
