@@ -1,10 +1,10 @@
-model: deepseek-ai/deepseek-v4.1-flash
+model: deepseek-ai/deepseek-v4.1-flash-1017
 label:
-  en_US: deepseek-ai/deepseek-v4.1-flash
+  en_US: deepseek-ai/deepseek-v4.1-flash-1017
 model_type: llm
 features:
-  - vision
   - agent-thought
+  - vision
   - tool-call
   - multi-tool-call
   - stream-tool-call
