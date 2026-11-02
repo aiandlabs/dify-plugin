@@ -7,6 +7,7 @@ Drives AiandLargeLanguageModel with schemas built from this plugin's own YAML fi
 
 import base64
 import os
+import re
 import struct
 import sys
 import zlib
@@ -78,6 +79,11 @@ def answer(text):
     return text.rsplit("</think>", 1)[-1]
 
 
+def says_red(text):
+    """A whole-word match, so a refusal like "the video you shared" does not count."""
+    return re.search(r"\bred\b", answer(text), re.IGNORECASE) is not None
+
+
 def run(llm, schema):
     m = schema.model
     ask = [UserPromptMessage(content="Reply with the single word: pong")]
@@ -113,7 +119,7 @@ def run(llm, schema):
             )
         ]
         text, _ = collect(llm.invoke(m, {"api_key": KEY}, img, params, stream=True))
-        check(f"{m} vision", "red" in answer(text).lower(), text[-40:])
+        check(f"{m} vision", says_red(text), text[-40:])
 
     if ModelFeature.VIDEO in (schema.features or []):
         # base64_data with no url is what Dify sends under its default base64 file transport.
@@ -127,7 +133,7 @@ def run(llm, schema):
             )
         ]
         text, _ = collect(llm.invoke(m, {"api_key": KEY}, vid, params, stream=True))
-        check(f"{m} video", "red" in answer(text).lower(), text[-40:])
+        check(f"{m} video", says_red(text), text[-40:])
 
 
 def main():
