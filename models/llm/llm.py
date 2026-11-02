@@ -1,7 +1,9 @@
 from collections.abc import Generator
+from pathlib import Path
 from typing import Optional, Union
 
 import requests
+import yaml
 
 from dify_plugin import OAICompatLargeLanguageModel
 from dify_plugin.entities.model import AIModelEntity, ModelFeature
@@ -9,6 +11,8 @@ from dify_plugin.entities.model.llm import LLMMode, LLMResult
 from dify_plugin.entities.model.message import PromptMessage, PromptMessageTool
 
 AIAND_API_BASE = "https://api.aiand.com/v1"
+# Names the plugin to ai&, which otherwise sees only the python-requests default and can't tell Dify traffic apart.
+USER_AGENT = f"aiand-dify-plugin/{yaml.safe_load((Path(__file__).resolve().parents[2] / 'manifest.yaml').read_text())['version']}"
 
 
 class AiandLargeLanguageModel(OAICompatLargeLanguageModel):
@@ -69,6 +73,7 @@ class AiandLargeLanguageModel(OAICompatLargeLanguageModel):
     def _add_custom_parameters(credentials: dict) -> None:
         credentials["endpoint_url"] = AIAND_API_BASE
         credentials["mode"] = LLMMode.CHAT.value
+        credentials["extra_headers"] = {"User-Agent": USER_AGENT}
 
     def _add_function_call(self, model: str, credentials: dict) -> None:
         if "function_calling_type" in credentials:
