@@ -3,8 +3,8 @@ label:
   en_US: ai&
   ja_JP: ai&
 description:
-  en_US: Open-weight models through an OpenAI-compatible API.
-  ja_JP: OpenAI 互換 API で利用できるオープンウェイトモデル。
+  en_US: Japan-hosted open models through an OpenAI-compatible API.
+  ja_JP: 日本国内でホストされるオープンモデルを OpenAI 互換 API で利用できます。
 icon_small:
   en_US: icon.svg
 icon_small_dark:

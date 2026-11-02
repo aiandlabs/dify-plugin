@@ -1,4 +1,4 @@
-- deepseek-ai/deepseek-v4.1-flash
+- deepseek-ai/deepseek-v4.1-flash-1017
 - zai-org/glm-5.3
 - zai-org/glm-5.3-flash
 - qwen/qwen3.8-27b
@@ -8,3 +8,4 @@
 - qwen/qwen3.6-27b
 - deepseek-ai/deepseek-v4-pro
 - openai/gpt-oss-120b
+- meta/muse-spark-open

@@ -1,6 +1,6 @@
 # ai& for Dify
 
-Use ai& open-weight models in Dify: DeepSeek, Qwen, GLM, Kimi, Gemma, gpt-oss and more, served through an OpenAI-compatible API at `https://api.aiand.com/v1`.
+Use ai&'s Japan-hosted open models in Dify, including Gemma, gpt-oss and many more, through an OpenAI-compatible API at `https://api.aiand.com/v1`.
 
 ## Setup
 
@@ -14,6 +14,7 @@ All current ai& chat models are available after setup. Pick one in any LLM node,
 
 - **Tool calling** works on every model, including parallel and streamed tool calls.
 - **Image input** works on models marked with vision.
+- **Video input** works on models marked with video.
 - **Reasoning effort** lets you choose how much a model reasons before answering. Each model lists only the levels it supports. `none` turns reasoning off where the model allows it.
 - **Structured output** is available on listed models through the response format setting.
 
