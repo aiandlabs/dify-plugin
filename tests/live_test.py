@@ -18,6 +18,7 @@ import yaml  # noqa: E402
 from dify_plugin.entities.model import AIModelEntity, ModelFeature  # noqa: E402
 from dify_plugin.entities.model.message import (  # noqa: E402
     ImagePromptMessageContent,
+    VideoPromptMessageContent,
     PromptMessageTool,
     TextPromptMessageContent,
     UserPromptMessage,
@@ -72,6 +73,11 @@ def collect(gen):
     return text, calls
 
 
+def answer(text):
+    """The reply after any reasoning, which Dify shows as a <think> block."""
+    return text.rsplit("</think>", 1)[-1]
+
+
 def run(llm, schema):
     m = schema.model
     ask = [UserPromptMessage(content="Reply with the single word: pong")]
@@ -107,7 +113,21 @@ def run(llm, schema):
             )
         ]
         text, _ = collect(llm.invoke(m, {"api_key": KEY}, img, params, stream=True))
-        check(f"{m} vision", "red" in text.lower(), text[-40:])
+        check(f"{m} vision", "red" in answer(text).lower(), text[-40:])
+
+    if ModelFeature.VIDEO in (schema.features or []):
+        # base64_data with no url is what Dify sends under its default base64 file transport.
+        clip = base64.b64encode((ROOT / "tests/red.mp4").read_bytes()).decode()
+        vid = [
+            UserPromptMessage(
+                content=[
+                    VideoPromptMessageContent(format="mp4", mime_type="video/mp4", base64_data=clip),
+                    TextPromptMessageContent(data="What colour fills this video? One word."),
+                ]
+            )
+        ]
+        text, _ = collect(llm.invoke(m, {"api_key": KEY}, vid, params, stream=True))
+        check(f"{m} video", "red" in answer(text).lower(), text[-40:])
 
 
 def main():
