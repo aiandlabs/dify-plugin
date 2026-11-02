@@ -33,7 +33,9 @@ parameter_rules:
       ja_JP: 回答前にモデルが推論する量です。none は対応モデルで推論をオフにします。
     options:
       - none
+      - low
       - high
+      - xhigh
       - max
   - name: response_format
     use_template: response_format
