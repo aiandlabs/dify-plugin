@@ -91,7 +91,8 @@ def render(m: dict) -> str:
 def main() -> None:
     with urllib.request.urlopen(CATALOG_URL, timeout=30) as r:
         # A model with a retirement date stays in /v1/models until then; leave it out so a release never ships one.
-        models = [m for m in json.load(r)["data"] if not m.get("deprecation_date")]
+        # A transcription model has no output token limit and is not an LLM in Dify's terms.
+        models = [m for m in json.load(r)["data"] if not m.get("deprecation_date") and m.get("max_output_tokens")]
     for old in OUT.glob("*.yaml"):
         old.unlink()
     for m in models:
