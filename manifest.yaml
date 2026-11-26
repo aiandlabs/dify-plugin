@@ -8,6 +8,8 @@ label:
 description:
   en_US: "Japan-hosted open models with zero data retention: Gemma, gpt-oss and many more. OpenAI-compatible, with tool calling, image and video input, and reasoning control."
   ja_JP: 日本国内でホストされるオープンモデルAPIを、データ保持無しで提供。Gemma・gpt-oss をはじめ、多数のモデルに対応。OpenAI 互換で、ツール呼び出し、画像・動画入力、推論レベルの調整が可能です。
+tags:
+  - other
 icon: icon.svg
 icon_dark: icon-dark.svg
 resource:
